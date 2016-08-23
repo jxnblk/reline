@@ -4,7 +4,7 @@
   "description": "React SVG line icon components",
   "main": "index.js",
   "scripts": {
-    "prepublish": "babel src --out-dir dist",
+    "prepublish": "mkdir -p dist && babel src --out-dir dist",
     "build": "webpack -p",
     "start": "webpack-dev-server"
   },
