@@ -57,7 +57,7 @@ Creates SVG icons with straight lines
 
 **Props**
 
-- `path` - an array of x/y coordinate arrays to create straight lines
+- `path` - an array of x/y coordinate arrays to create straight lines, based on a 16x16 grid
 - `paths` - an array of path arrays to create segmented lines
 - `size` - number indicating the width and height of the icon in pixels (default `16`)
 - `strokeWidth` - number indicating the stroke width of the icon in pixels (default `3`)
