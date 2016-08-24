@@ -201,7 +201,7 @@ class PropsDemo extends React.Component {
           <Slider
             label={`Stroke Width ${strokeWidth}`}
             name='strokeWidth'
-            min={1}
+            min={.5}
             step={.5}
             max={8}
             value={strokeWidth}
@@ -246,7 +246,7 @@ class App extends React.Component {
         <Hr />
         <PropsDemo />
         <Hr />
-        <BigDemo />
+        <BigDemo size={48} />
         <BigDemo size={32} />
         <BigDemo size={16} />
         <Hr />
