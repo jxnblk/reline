@@ -1,6 +1,7 @@
 
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { Flex, Box } from 'reflexbox'
 import { Slider } from 'rebass'
 import hello from 'hello-color'
 import getColor from './get-color'
@@ -91,14 +92,6 @@ const BigDemo = (props) => (
   </div>
 )
 
-BigDemo.defaultProps = {
-  style: {
-    transitionProperty: 'stroke-width',
-    transitionDuration: '.2s',
-    transitionTimingFunction: 'ease-out'
-  }
-}
-
 const SizeDemo = ({
   sizes = [
     256,
@@ -156,12 +149,12 @@ const MiscDemo = () => (
   </div>
 )
 
-class App extends React.Component {
+class PropsDemo extends React.Component {
   constructor () {
     super()
     this.state = {
       strokeWidth: 3,
-      size: 128
+      size: 96
     }
     this.handleNumberChange = this.handleNumberChange.bind(this)
   }
@@ -174,18 +167,27 @@ class App extends React.Component {
 
   render () {
     const { size, strokeWidth } = this.state
+    const sx = {
+      slider: {
+        width: '100%'
+      },
+      icons: {
+        minHeight: 128 + 32
+      }
+    }
+    const iconProps = {
+      size,
+      strokeWidth,
+      style: {
+        transitionProperty: 'stroke-width, width, height',
+        transitionDuration: '.2s',
+        transitionTimingFunction: 'ease-out'
+      }
+    }
 
     return (
       <div>
-        <h1>Reline</h1>
-        <Text>
-          React SVG line icon components
-        </Text>
-          <Link href='https://github.com/jxnblk/reline'>
-            GitHub
-          </Link>
-        <Hr />
-        <div>
+        <Flex mb={2} px={2}>
           <Slider
             label={`Size ${size}`}
             name='size'
@@ -193,6 +195,8 @@ class App extends React.Component {
             step={8}
             max={128}
             value={size}
+            mr={1}
+            style={sx.slider}
             onChange={this.handleNumberChange} />
           <Slider
             label={`Stroke Width ${strokeWidth}`}
@@ -201,10 +205,47 @@ class App extends React.Component {
             step={.5}
             max={8}
             value={strokeWidth}
+            ml={1}
+            style={sx.slider}
             onChange={this.handleNumberChange} />
-          <BigDemo size={size} strokeWidth={strokeWidth} />
+        </Flex>
+        <div style={sx.icons}>
+          <X {...iconProps} m={2} />
+          <Plus {...iconProps} m={2} />
+          <Minus {...iconProps} m={2} />
+          <Burger {...iconProps} m={2} />
+          <Square {...iconProps} m={2} />
+          <Chevron {...iconProps} right m={2} />
+          <Arrow {...iconProps} right m={2} />
+          <Triangle {...iconProps} up m={2} />
         </div>
-        <BigDemo size={128} />
+      </div>
+    )
+  }
+}
+
+const Header = () => {
+  return (
+    <div>
+      <h1>Reline</h1>
+      <Text>
+        React SVG line icon components
+      </Text>
+      <Link href='https://github.com/jxnblk/reline'>
+        GitHub
+      </Link>
+    </div>
+  )
+}
+
+class App extends React.Component {
+  render () {
+    return (
+      <ColorBox>
+        <Header />
+        <Hr />
+        <PropsDemo />
+        <Hr />
         <BigDemo />
         <BigDemo size={32} />
         <BigDemo size={16} />
@@ -227,10 +268,12 @@ class App extends React.Component {
         <DirectionalsDemo name='Triangle' Component={Triangle} />
         <MiscDemo />
         <Hr />
-        <Link href='http://jxnblk.com'>
-          Made by Jxnblk
-        </Link>
-      </div>
+        <footer>
+          <Link href='http://jxnblk.com'>
+            Made by Jxnblk
+          </Link>
+        </footer>
+      </ColorBox>
     )
   }
 }

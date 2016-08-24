@@ -29,11 +29,10 @@ const Icon = ({
   right,
   ...props
 }) => {
-  const shape = getShape(props.strokeWidth || 1)({ name, up, down, left, right })
+  const shape = getShape(props.strokeWidth || 3)({ name, up, down, left, right })
 
   return (
     <Line {...props}
-      debug
       paths={shape} />
   )
 }

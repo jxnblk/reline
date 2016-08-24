@@ -17,7 +17,7 @@ const Line = ({
   paths = [],
   size = 16,
   stroke = 'currentcolor',
-  strokeWidth = 1,
+  strokeWidth = 3,
   style,
   m,
   mt,
