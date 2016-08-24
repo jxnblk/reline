@@ -129,27 +129,27 @@ const createShapes = (strokeWidth) => {
     },
     triangle: {
       up: [[
-        [3, 12],
-        [13, 12],
-        [8, 15 - (5 * Math.sqrt(5))],
+        [a, 13],
+        [c, 13],
+        [8, 13 - b * Math.sqrt(3)],
         ['z']
       ]],
       down: [[
-        [3, 4],
-        [13, 4],
-        [8, 1 + (5 * Math.sqrt(5))],
+        [a, 3],
+        [c, 3],
+        [8, 3 + b * Math.sqrt(3)],
         ['z']
       ]],
       left: [[
-        [12, 3],
-        [12, 13],
-        [15 - (5 * Math.sqrt(5)), 8],
+        [13, a],
+        [13, c],
+        [13 - b * Math.sqrt(3), 8],
         ['z']
       ]],
       right: [[
-        [4, 3],
-        [4, 13],
-        [1 + (5 * Math.sqrt(5)), 8],
+        [3, a],
+        [3, c],
+        [3 + b * Math.sqrt(3), 8],
         ['z']
       ]]
     }
