@@ -1,6 +1,6 @@
 {
   "name": "reline",
-  "version": "1.0.0-beta.1",
+  "version": "1.0.0-beta.2",
   "description": "React SVG line icon components",
   "main": "index.js",
   "scripts": {
