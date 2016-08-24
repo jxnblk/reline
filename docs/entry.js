@@ -159,6 +159,7 @@ class App extends React.Component {
             GitHub
           </Link>
         <Hr />
+        <BigDemo size={128} />
         <BigDemo />
         <BigDemo size={32} />
         <BigDemo size={16} />
