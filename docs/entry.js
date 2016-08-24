@@ -1,6 +1,8 @@
 
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { Flex, Box } from 'reflexbox'
+import { Slider } from 'rebass'
 import hello from 'hello-color'
 import getColor from './get-color'
 import {
@@ -67,26 +69,26 @@ const Hr = () => {
   return <hr style={sx} />
 }
 
-const BigDemo = ({ size = 48 }) => (
+const BigDemo = (props) => (
   <div>
-    <X size={size} m={2} />
-    <Plus size={size} m={2} />
-    <Minus size={size} m={2} />
-    <Burger size={size} m={2} />
-    <Square size={size} m={2} />
-    <Diamond size={size} m={2} />
-    <Chevron up size={size} m={2} />
-    <Chevron down size={size} m={2} />
-    <Chevron left size={size} m={2} />
-    <Chevron right size={size} m={2} />
-    <Arrow up size={size} m={2} />
-    <Arrow down size={size} m={2} />
-    <Arrow left size={size} m={2} />
-    <Arrow right size={size} m={2} />
-    <Triangle up size={size} m={2} />
-    <Triangle down size={size} m={2} />
-    <Triangle left size={size} m={2} />
-    <Triangle right size={size} m={2} />
+    <X {...props} m={2} />
+    <Plus {...props} m={2} />
+    <Minus {...props} m={2} />
+    <Burger {...props} m={2} />
+    <Square {...props} m={2} />
+    <Diamond {...props} m={2} />
+    <Chevron {...props} up m={2} />
+    <Chevron {...props} down m={2} />
+    <Chevron {...props} left m={2} />
+    <Chevron {...props} right m={2} />
+    <Arrow {...props} up m={2} />
+    <Arrow {...props} down m={2} />
+    <Arrow {...props} left m={2} />
+    <Arrow {...props} right m={2} />
+    <Triangle {...props} up m={2} />
+    <Triangle {...props} down m={2} />
+    <Triangle {...props} left m={2} />
+    <Triangle {...props} right m={2} />
   </div>
 )
 
@@ -147,19 +149,104 @@ const MiscDemo = () => (
   </div>
 )
 
+class PropsDemo extends React.Component {
+  constructor () {
+    super()
+    this.state = {
+      strokeWidth: 3,
+      size: 96
+    }
+    this.handleNumberChange = this.handleNumberChange.bind(this)
+  }
+
+  handleNumberChange (e) {
+    const { name, value } = e.target
+    const n = parseFloat(value)
+    this.setState({ [name]: n })
+  }
+
+  render () {
+    const { size, strokeWidth } = this.state
+    const sx = {
+      slider: {
+        width: '100%'
+      },
+      icons: {
+        minHeight: 128 + 32
+      }
+    }
+    const iconProps = {
+      size,
+      strokeWidth,
+      style: {
+        transitionProperty: 'stroke-width, width, height',
+        transitionDuration: '.2s',
+        transitionTimingFunction: 'ease-out'
+      }
+    }
+
+    return (
+      <div>
+        <Flex mb={2} px={2}>
+          <Slider
+            label={`Size ${size}`}
+            name='size'
+            min={8}
+            step={8}
+            max={128}
+            value={size}
+            mr={1}
+            style={sx.slider}
+            onChange={this.handleNumberChange} />
+          <Slider
+            label={`Stroke Width ${strokeWidth}`}
+            name='strokeWidth'
+            min={.5}
+            step={.5}
+            max={8}
+            value={strokeWidth}
+            ml={1}
+            style={sx.slider}
+            onChange={this.handleNumberChange} />
+        </Flex>
+        <div style={sx.icons}>
+          <X {...iconProps} m={2} />
+          <Plus {...iconProps} m={2} />
+          <Minus {...iconProps} m={2} />
+          <Burger {...iconProps} m={2} />
+          <Square {...iconProps} m={2} />
+          <Chevron {...iconProps} right m={2} />
+          <Arrow {...iconProps} right m={2} />
+          <Triangle {...iconProps} up m={2} />
+        </div>
+      </div>
+    )
+  }
+}
+
+const Header = () => {
+  return (
+    <div>
+      <h1>Reline</h1>
+      <Text>
+        React SVG line icon components
+      </Text>
+      <Link href='https://github.com/jxnblk/reline'>
+        GitHub
+      </Link>
+    </div>
+  )
+}
+
 class App extends React.Component {
   render () {
     return (
       <ColorBox>
-        <h1>Reline</h1>
-        <Text>
-          React SVG line icon components
-        </Text>
-          <Link href='https://github.com/jxnblk/reline'>
-            GitHub
-          </Link>
+        <Header />
         <Hr />
-        <BigDemo />
+        <PropsDemo />
+        <Hr />
+        <BigDemo size={48} />
         <BigDemo size={32} />
         <BigDemo size={16} />
         <Hr />
@@ -181,9 +268,11 @@ class App extends React.Component {
         <DirectionalsDemo name='Triangle' Component={Triangle} />
         <MiscDemo />
         <Hr />
-        <Link href='http://jxnblk.com'>
-          Made by Jxnblk
-        </Link>
+        <footer>
+          <Link href='http://jxnblk.com'>
+            Made by Jxnblk
+          </Link>
+        </footer>
       </ColorBox>
     )
   }

@@ -32,6 +32,7 @@ const Line = ({
   const sx = {
     display: 'inline-block',
     verticalAlign: 'middle',
+    overflow: 'visible',
     ...margin({
       m,
       mt,
@@ -41,7 +42,7 @@ const Line = ({
       mx,
       my,
     }),
-    style
+    ...style
   }
 
   return (
@@ -60,7 +61,8 @@ const Line = ({
         <path key={i} d={line(...p)} />
       ))}
       {debug && (
-        <g strokeWidth='.25' stroke='magenta'>
+        <g strokeWidth={1/8} opacity={1/2} stroke='magenta'>
+          <path d={line([0, 0], [16, 0], [16, 16], [0, 16], ['z'])} />
           <path d={line([8, 0], [8, 16])} />
           <path d={line([0, 8], [16, 8])} />
         </g>
