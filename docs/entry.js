@@ -1,6 +1,7 @@
 
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { Slider } from 'rebass'
 import hello from 'hello-color'
 import getColor from './get-color'
 import {
@@ -67,28 +68,36 @@ const Hr = () => {
   return <hr style={sx} />
 }
 
-const BigDemo = ({ size = 48 }) => (
+const BigDemo = (props) => (
   <div>
-    <X size={size} m={2} />
-    <Plus size={size} m={2} />
-    <Minus size={size} m={2} />
-    <Burger size={size} m={2} />
-    <Square size={size} m={2} />
-    <Diamond size={size} m={2} />
-    <Chevron up size={size} m={2} />
-    <Chevron down size={size} m={2} />
-    <Chevron left size={size} m={2} />
-    <Chevron right size={size} m={2} />
-    <Arrow up size={size} m={2} />
-    <Arrow down size={size} m={2} />
-    <Arrow left size={size} m={2} />
-    <Arrow right size={size} m={2} />
-    <Triangle up size={size} m={2} />
-    <Triangle down size={size} m={2} />
-    <Triangle left size={size} m={2} />
-    <Triangle right size={size} m={2} />
+    <X {...props} m={2} />
+    <Plus {...props} m={2} />
+    <Minus {...props} m={2} />
+    <Burger {...props} m={2} />
+    <Square {...props} m={2} />
+    <Diamond {...props} m={2} />
+    <Chevron {...props} up m={2} />
+    <Chevron {...props} down m={2} />
+    <Chevron {...props} left m={2} />
+    <Chevron {...props} right m={2} />
+    <Arrow {...props} up m={2} />
+    <Arrow {...props} down m={2} />
+    <Arrow {...props} left m={2} />
+    <Arrow {...props} right m={2} />
+    <Triangle {...props} up m={2} />
+    <Triangle {...props} down m={2} />
+    <Triangle {...props} left m={2} />
+    <Triangle {...props} right m={2} />
   </div>
 )
+
+BigDemo.defaultProps = {
+  style: {
+    transitionProperty: 'stroke-width',
+    transitionDuration: '.2s',
+    transitionTimingFunction: 'ease-out'
+  }
+}
 
 const SizeDemo = ({
   sizes = [
@@ -148,9 +157,26 @@ const MiscDemo = () => (
 )
 
 class App extends React.Component {
+  constructor () {
+    super()
+    this.state = {
+      strokeWidth: 3,
+      size: 128
+    }
+    this.handleNumberChange = this.handleNumberChange.bind(this)
+  }
+
+  handleNumberChange (e) {
+    const { name, value } = e.target
+    const n = parseFloat(value)
+    this.setState({ [name]: n })
+  }
+
   render () {
+    const { size, strokeWidth } = this.state
+
     return (
-      <ColorBox>
+      <div>
         <h1>Reline</h1>
         <Text>
           React SVG line icon components
@@ -159,6 +185,25 @@ class App extends React.Component {
             GitHub
           </Link>
         <Hr />
+        <div>
+          <Slider
+            label={`Size ${size}`}
+            name='size'
+            min={8}
+            step={8}
+            max={128}
+            value={size}
+            onChange={this.handleNumberChange} />
+          <Slider
+            label={`Stroke Width ${strokeWidth}`}
+            name='strokeWidth'
+            min={1}
+            step={.5}
+            max={8}
+            value={strokeWidth}
+            onChange={this.handleNumberChange} />
+          <BigDemo size={size} strokeWidth={strokeWidth} />
+        </div>
         <BigDemo size={128} />
         <BigDemo />
         <BigDemo size={32} />
@@ -185,7 +230,7 @@ class App extends React.Component {
         <Link href='http://jxnblk.com'>
           Made by Jxnblk
         </Link>
-      </ColorBox>
+      </div>
     )
   }
 }

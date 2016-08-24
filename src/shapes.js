@@ -1,15 +1,15 @@
 
-const getMargin = width => width / 2
-const getHalf = margin => 8 - margin
+const createShapes = (strokeWidth) => {
+  // Coordinates for compensating for perpendicular strokes
+  // 0 a    8    c 16
+  const a = strokeWidth / 2
+  const b = 8 - a
+  const c = 16 - a
 
-const getShapes = (strokeWidth) => {
-  const m = getMargin(strokeWidth)
-  // a b c
-  const a0 = m / 2
-  const a = m
-  const b = getHalf(m)
-  const c = 16 - a // full width
-  const c0 = 16 - a0 // full width (angled)
+  // 45 degree angles
+  const a0 = a / Math.sqrt(2)
+  const b0 = 8 - a0
+  const c0 = 16 - a0
 
   const shapes = {
     x: [
@@ -65,24 +65,24 @@ const getShapes = (strokeWidth) => {
     ],
     chevron: {
       down: [[
-        [a0, 8 - b / 2],
-        [8, 8 + b / 2 + a0],
-        [c0, 8 - b / 2]
+        [a0, 5],
+        [8, 5 + b0],
+        [c0, 5]
       ]],
       up: [[
-        [a0, 8 + b / 2],
-        [8, 8 - b / 2 - a0],
-        [c0, 8 + b / 2]
+        [a0, 11],
+        [8, 11 - b0],
+        [c0, 11]
       ]],
       left: [[
-        [8 + b / 2, a0],
-        [8 - b / 2 - a0, 8],
-        [8 + b / 2, c0]
+        [11, a0],
+        [11 - b0, 8],
+        [11, c0]
       ]],
       right: [[
-        [8 - b / 2, a0],
-        [8 + b / 2 + a0, 8],
-        [8 - b / 2, c0]
+        [5, a0],
+        [5 + b0, 8],
+        [5, c0]
       ]]
     },
     arrow: {
@@ -91,9 +91,9 @@ const getShapes = (strokeWidth) => {
           [8, a],
           [8, 16],
         ], [
-          [a0, b + a + a0],
+          [a0, b0 + a],
           [8, a],
-          [c0, b + a + a0],
+          [c0, b0 + a],
         ]
       ],
       down: [
@@ -101,9 +101,9 @@ const getShapes = (strokeWidth) => {
           [8, 0],
           [8, c],
         ], [
-          [a0, b + a0],
+          [a0, 16 - b0 - a],
           [8, c],
-          [c0, b + a0],
+          [c0, 16 - b0 - a],
         ]
       ],
       right: [
@@ -111,9 +111,9 @@ const getShapes = (strokeWidth) => {
           [0, 8],
           [c, 8]
         ], [
-          [b + a0, a0],
+          [16 - b0 - a, a0],
           [c, 8],
-          [b + a0, c0]
+          [16 - b0 - a, c0]
         ]
       ],
       left: [
@@ -121,9 +121,9 @@ const getShapes = (strokeWidth) => {
           [a, 8],
           [16, 8]
         ], [
-          [b + a + a0, a0],
+          [b0 + a, a0],
           [a, 8],
-          [b + a + a0, c0]
+          [b0 + a, c0]
         ]
       ]
     },
@@ -158,5 +158,5 @@ const getShapes = (strokeWidth) => {
   return shapes
 }
 
-export default getShapes
+export default createShapes
 

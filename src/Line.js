@@ -42,7 +42,7 @@ const Line = ({
       mx,
       my,
     }),
-    style
+    ...style
   }
 
   return (
