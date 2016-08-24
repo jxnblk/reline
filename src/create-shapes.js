@@ -1,5 +1,5 @@
 
-const createShapes = (strokeWidth) => {
+const createShapes = (strokeWidth = 3) => {
   // Coordinates for compensating for perpendicular strokes
   // 0 a    8    c 16
   const a = strokeWidth / 2
